@@ -57,9 +57,16 @@ public class UsersController {
             HttpSession session = request.getSession();
             session.setAttribute("userID", user.getId());
             model.addAttribute("userID", session.getAttribute( "userID"));
-            return "dashboard";
+            model.addAttribute("userID", user.getFullName());
+            return "redirect:/products/all";
         }
         return "redirect:/user/login";
+    }
+
+    @GetMapping("/logout")
+    public String logout(HttpSession session){
+        session.invalidate();
+        return "index";
     }
 
 }

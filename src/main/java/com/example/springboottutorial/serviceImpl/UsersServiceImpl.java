@@ -22,6 +22,10 @@ public class UsersServiceImpl {
         usersRepositories.findByUsername(username)
                 .orElseThrow(()->new NullPointerException("User not found!"));
 
+    public Function<Long, Users> findUsersById = (id)->
+            usersRepositories.findById(id)
+                    .orElseThrow(()-> new NullPointerException("User not found"));
+
     public Function<Users, Users> saveUser = (user)->usersRepositories.save(user);
 
     public Function<PasswordDTO, Boolean> verifyUserPassword = passwordDTO -> BCrypt.verifyer()
